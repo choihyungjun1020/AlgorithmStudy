@@ -6,20 +6,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         String problem = sc.nextLine();
-        String answer = "";
 
         for (int i = 0; i < problem.length(); i++) {
+            char a = problem.charAt(i);
             if (90 < problem.charAt(i)) {
-                char a = (char) (problem.charAt(i)-32);
-                answer = answer + a;
-                continue;
+                System.out.print((char) (a - 32));
             }
             else {
-                char a = (char) (problem.charAt(i)+32);
-                answer = answer + a;
+                System.out.print((char) (a + 32));
             }
         }
-
-        System.out.println(answer);
     }
 }
