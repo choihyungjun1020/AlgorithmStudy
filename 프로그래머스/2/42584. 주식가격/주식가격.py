@@ -1,14 +1,15 @@
-from collections import deque
-
 def solution(prices):
-    n = len(prices)
-    answer = [0] * n
+    answer = [0] * len(prices)
+    stack = [[prices[-1], 0]]
 
-    for i in range(n):
-        for j in range(i + 1, n):
-            answer[i] += 1
-            
-            if prices[i] > prices[j]:
-                break
-    
+    for i in range(len(prices) - 2, -1, -1):
+        price = prices[i]
+
+        popCount = 1
+        while stack and price <= stack[-1][0]:
+            _ , count = stack.pop()
+            popCount += count
+        stack.append([price, popCount])
+        answer[i] = popCount
+
     return answer
