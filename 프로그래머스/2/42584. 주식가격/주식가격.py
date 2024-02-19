@@ -1,15 +1,18 @@
 def solution(prices):
-    answer = [0] * len(prices)
-    stack = [[prices[-1], 0]]
+    n = len(prices)
+    answer = [0] * n
+    
+    stack = [0]
+    
+    for i in range(1, n):
+        while stack and prices[i] < prices[stack[-1]]:
+            j = stack.pop()
+            answer[j] = i - j
+        stack.append(i)
 
-    for i in range(len(prices) - 2, -1, -1):
-        price = prices[i]
-
-        popCount = 1
-        while stack and price <= stack[-1][0]:
-            _ , count = stack.pop()
-            popCount += count
-        stack.append([price, popCount])
-        answer[i] = popCount
-
+    while stack:
+        j = stack.pop()
+        answer[j] = n - 1 - j
+    
     return answer
+
